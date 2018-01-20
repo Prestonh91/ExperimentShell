@@ -17,9 +17,9 @@ def load_iris_data():
     return data.data, data.target
 
 
-def get_classifier():
+def get_classifier(neighbors):
     #classifier = GaussianNB()
-    classifier = kNNClassifier(n_neighbors=3)
+    classifier = kNNClassifier(n_neighbors=neighbors)
 
     return classifier
 
@@ -30,9 +30,26 @@ def run_algorithm(data, targets, classifier):
     train, test, train_t, test_t = \
         train_test_split(data, targets, train_size=0.7)
 
+    # Use my own knn algorithm
     model = classifier.fit(data, targets)
-    predictions = model.predict(test)
-    calc_correct_percentage(test_t, predictions)
+    predictions_geo, predictions_man = model.predict(test)
+
+    print("Number of neighbor = ", classifier.neighbors)
+    print("My own algorithm(Euclidean Distance)")
+    calc_correct_percentage(test_t, predictions_geo)
+
+    print("My own algorithm(Manhattan Distance)")
+    calc_correct_percentage(test_t, predictions_man)
+
+    # User preloaded knn algorithm
+    k_classifier = KNeighborsClassifier(n_neighbors=5)
+    model = k_classifier.fit(data, targets)
+    k_predictions = model.predict(test)
+
+    print("Pre-loaded algorithm")
+    calc_correct_percentage(test_t, k_predictions)
+    print("\n\n")
+
 
 
 
@@ -40,15 +57,20 @@ def main():
     # Load Iris dataset and separate the Data and Targets from the dataset
     data, targets = load_iris_data()
 
+    classifier = get_classifier(20)
+    run_algorithm(data, targets, classifier)
 
-    classifier = get_classifier()
-    predictions = run_algorithm(data, targets, classifier)
+    classifier = get_classifier(10)
+    run_algorithm(data, targets, classifier)
 
-    # k_model = k_classifier.fit(train, train_target)
-    # predictions = k_model.predict(test)
+    classifier = get_classifier(8)
+    run_algorithm(data, targets, classifier)
 
-    # print (predictions)
-    # print (test_target)
+    classifier = get_classifier(6)
+    run_algorithm(data, targets, classifier)
+
+    classifier = get_classifier(3)
+    run_algorithm(data, targets, classifier)
 
 
 if __name__ == "__main__":
