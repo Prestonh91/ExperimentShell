@@ -2,14 +2,17 @@ import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from file_reader import file_reader
-from data_processor import data_processor
+from file_reader import FileReader
+from data_processor import DataProcessor
 from k_neighbors import kNNClassifier
 
 def calc_correct_percentage(test_t, guess_t):
     total = len(test_t)
-    correct = (test_t == guess_t).sum()
-    percent =  "%.2f" % (correct / total * 100.)
+    correct = 0
+    for i in range(total):
+        if (test_t[i] == guess_t[i]):
+            correct += 1
+    percent = "%.2f" % (correct / total * 100.)
     print(correct, "/", total, " = ", percent, "%")
 
 
@@ -44,39 +47,29 @@ def run_algorithm(data, targets, classifier):
 
     # User preloaded knn algorithm
     k_classifier = KNeighborsClassifier(n_neighbors=5)
-    model = k_classifier.fit(data, targets)
+    model = k_classifier.fit(data, targets.ravel())
     k_predictions = model.predict(test)
 
     print("Pre-loaded algorithm")
     calc_correct_percentage(test_t, k_predictions)
-    print("\n\n")
+    print("\n")
 
 
 def main():
     # Load Iris dataset and separate the Data and Targets from the dataset
-    data, targets = load_iris_data()
-    reader = file_reader()
-    processor = data_processor()
+    # data, targets = load_iris_data()
+    reader = FileReader()
+    processor = DataProcessor()
 
-    data = reader.read_file("car.txt")
-    processor.process_cars1(data)
+    # Read data for car acceptability, process, and run
+    raw_data = reader.read_file("car.txt")
+    data, targets = processor.process_cars1(raw_data)
 
+    for i in range(3, 22, 3):
+        classifier = get_classifier(i)
+        run_algorithm(data, targets, classifier)
 
-
-    # classifier = get_classifier(20)
-    # run_algorithm(data, targets, classifier)
-    #
-    # classifier = get_classifier(10)
-    # run_algorithm(data, targets, classifier)
-    #
-    # classifier = get_classifier(8)
-    # run_algorithm(data, targets, classifier)
-    #
-    # classifier = get_classifier(6)
-    # run_algorithm(data, targets, classifier)
-    #
-    # classifier = get_classifier(3)
-    # run_algorithm(data, targets, classifier)
+    # Read data for MPG car, process, and run
 
 
 if __name__ == "__main__":
