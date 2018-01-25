@@ -14,8 +14,9 @@ class FileReader:
         elif file_name == 'car2.txt':
             header = []
         elif file_name == 'health.txt':
-            header = []
-
+            header = ["Pregnancies", "Glucose_Tol", "Diastolic",
+                      "Tricep", "Insulin", "BMI", "Pedigree",
+                      "Age", "Diabetes"]
         return header
 
     def read_file(self, file_name):

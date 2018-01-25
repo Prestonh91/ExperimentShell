@@ -62,15 +62,20 @@ def main():
     processor = DataProcessor()
 
     # Read data for car acceptability, process, and run
-    raw_data = reader.read_file("car.txt")
-    data, targets = processor.process_cars1(raw_data)
-
-    for i in range(3, 22, 3):
-        classifier = get_classifier(i)
-        run_algorithm(data, targets, classifier)
+    # raw_car_data = reader.read_file("car.txt")
+    # car_data, car_targets = processor.process_cars1(raw_car_data)
+    #
+    # for i in range(3, 22, 3):
+    #     classifier = get_classifier(i)
+    #     run_algorithm(car_data, car_targets, classifier)
 
     # Read data for MPG car, process, and run
+    raw_health_data = reader.read_file("health.txt")
+    std_diabetes, norm_diabetes, tar_diabetes  = processor.process_health(raw_health_data)
 
+    # classifier = get_classifier(10)
+    # run_algorithm(std_diabetes, tar_diabetes, classifier)
+    # run_algorithm(norm_diabetes, tar_diabetes, classifier)
 
 if __name__ == "__main__":
     main()
