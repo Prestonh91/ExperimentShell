@@ -1,8 +1,9 @@
 import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
+from file_reader import file_reader
+from data_processor import data_processor
 from k_neighbors import kNNClassifier
 
 def calc_correct_percentage(test_t, guess_t):
@@ -51,26 +52,31 @@ def run_algorithm(data, targets, classifier):
     print("\n\n")
 
 
-
-
 def main():
     # Load Iris dataset and separate the Data and Targets from the dataset
     data, targets = load_iris_data()
+    reader = file_reader()
+    processor = data_processor()
 
-    classifier = get_classifier(20)
-    run_algorithm(data, targets, classifier)
+    data = reader.read_file("car.txt")
+    processor.process_cars1(data)
 
-    classifier = get_classifier(10)
-    run_algorithm(data, targets, classifier)
 
-    classifier = get_classifier(8)
-    run_algorithm(data, targets, classifier)
 
-    classifier = get_classifier(6)
-    run_algorithm(data, targets, classifier)
-
-    classifier = get_classifier(3)
-    run_algorithm(data, targets, classifier)
+    # classifier = get_classifier(20)
+    # run_algorithm(data, targets, classifier)
+    #
+    # classifier = get_classifier(10)
+    # run_algorithm(data, targets, classifier)
+    #
+    # classifier = get_classifier(8)
+    # run_algorithm(data, targets, classifier)
+    #
+    # classifier = get_classifier(6)
+    # run_algorithm(data, targets, classifier)
+    #
+    # classifier = get_classifier(3)
+    # run_algorithm(data, targets, classifier)
 
 
 if __name__ == "__main__":
