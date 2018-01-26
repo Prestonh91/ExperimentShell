@@ -70,12 +70,16 @@ def main():
     #     run_algorithm(car_data, car_targets, classifier)
 
     # Read data for MPG car, process, and run
-    raw_health_data = reader.read_file("health.txt")
-    std_diabetes, norm_diabetes, tar_diabetes  = processor.process_health(raw_health_data)
+    # raw_health_data = reader.read_file("health.txt")
+    # std_diabetes, norm_diabetes, tar_diabetes  =\
+    #     processor.process_health(raw_health_data)
 
     # classifier = get_classifier(10)
     # run_algorithm(std_diabetes, tar_diabetes, classifier)
     # run_algorithm(norm_diabetes, tar_diabetes, classifier)
+
+    raw_mpg_data = reader.read_file("mpg.txt")
+    processor.process_mpg_cars(raw_mpg_data)
 
 if __name__ == "__main__":
     main()

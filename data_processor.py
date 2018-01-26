@@ -2,6 +2,7 @@ from sklearn import preprocessing
 from copy import deepcopy
 import pandas as pd
 import numpy as np
+import re
 
 
 class DataProcessor:
@@ -48,3 +49,13 @@ class DataProcessor:
         data = np.array(data)
 
         return data, data_norm, targets
+
+    def process_mpg_cars(self, data):
+        inputs = data.shape[0]
+        new_data = np.empty(dtype=str ,shape=(inputs,7))
+        for i in range(data.shape[0]):
+            row = [re.findall(r'\S+', data[i,0])]
+            new_row = [row[0][:7]]
+            new_data[i] = new_row[0]
+
+        print(new_data.shape)
