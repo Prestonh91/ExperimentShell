@@ -52,10 +52,24 @@ class DataProcessor:
 
     def process_mpg_cars(self, data):
         inputs = data.shape[0]
-        new_data = np.empty(dtype=str ,shape=(inputs,7))
+        new_data = np.ndarray(dtype=object, shape=(inputs, 8))
+
         for i in range(data.shape[0]):
             row = [re.findall(r'\S+', data[i,0])]
-            new_row = [row[0][:7]]
-            new_data[i] = new_row[0]
+            new_row = np.array([row[0][:8]])
+            new_data[i] = new_row
 
-        print(new_data.shape)
+        new_data = pd.DataFrame(new_data)
+        new_data[3].replace(to_replace="?",value="100.0", inplace=True)
+        new_data = new_data.astype(dtype=float)
+
+
+        targets = np.array(new_data[0])
+        new_data = np.array(new_data)
+        new_data = new_data[:,1:]
+
+        norm_data = preprocessing.minmax_scale(new_data)
+        scalar = preprocessing.StandardScaler(with_mean=False)
+        new_data = scalar.fit_transform(new_data)
+
+        return new_data, norm_data, targets
