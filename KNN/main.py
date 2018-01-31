@@ -1,13 +1,12 @@
-import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import cross_val_score
 from sklearn import svm
-from file_reader import FileReader
-from data_processor import DataProcessor
-from k_neighbors import kNNClassifier
+from KNN.file_reader import FileReader
+from KNN.data_processor import DataProcessor
+from KNN.k_neighbors import kNNClassifier
 
 def calc_correct_percentage(test_t, guess_t):
     total = len(test_t)
