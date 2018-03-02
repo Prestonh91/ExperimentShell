@@ -32,11 +32,12 @@ class DataProcessor:
 
         # Replace "bad" zeros
         data[["Glucose_Tol", "Diastolic", "Tricep", "Insulin", "BMI"]] = \
-            data[[1,2,3,4,5]].replace(0, np.NaN)
+            data[["Glucose_Tol", "Diastolic", "Tricep",
+                  "Insulin", "BMI"]].replace(0, np.NaN)
         data.fillna(data.mean(), inplace=True)
 
         #Remove targets before Standardizing and Normalizing
-        targets = data[[8]]
+        targets = data[["Diabetes"]]
         data = data.drop("Diabetes", axis=1)
 
         # Declare Standardization and Min_Max, scale glucose test
