@@ -20,6 +20,7 @@ def processIris(data, targets):
         train_test_split(norm_data, targets, train_size=0.7, test_size=0.3)
     return train, test, train_t, test_t
 
+
 def main():
     data, targets = loadData()
     train, test, train_t, test_t = processIris(data, targets)
@@ -31,18 +32,10 @@ def main():
 
     iris_network = NeuralNet()
     iris_network.create_layer(4)
-    iris_network.train_network(train[:1], train_t)
-    # for layer in iris_network.layers:
+    iris_network.train_network(train, train_t)
+    # iris_network.predict(test)
 
 
-
-    # layer = Layer(3)
-    # layer.calc_layer_output(train)
-    # print(layer.outputs)
-
-    # h_layer = Layer(1)
-    # h_layer.calc_layer_output(h_data_norm)
-    # print(h_layer.outputs)
 
 
 if __name__ == "__main__":
