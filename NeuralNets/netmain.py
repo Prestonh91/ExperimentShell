@@ -3,9 +3,8 @@ from KNN.file_reader import FileReader
 from KNN.data_processor import DataProcessor
 from sklearn import datasets
 from sklearn import preprocessing
+from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
-from NeuralNets.neuralnode import Node
-from NeuralNets.neuralnode import Layer
 from NeuralNets.neuralnode import NeuralNet
 
 
@@ -59,6 +58,20 @@ def main():
     print("Iris prediction correct = ", correct, "out of", len(test),
           "\nAccuracy = ", (correct / len(test_t) * 100))
 
+    mlp_class = MLPClassifier(solver='lbfgs', alpha=1e-5,
+                              hidden_layer_sizes=(6))
+    mlp_class.fit(train, train_t)
+    mlp_iris_predict = mlp_class.predict(test)
+
+    correct = 0
+    for i in range(len(test_t)):
+        if mlp_iris_predict[i] == test_t[i]:
+            correct += 1
+
+    print("Iris with 6 nodes in hidden layer SKLEARN MODEL")
+    print("Iris prediction correct = ", correct, "out of", len(test_t),
+          "\nAccuracy = ", (correct / len(test_t) * 100))
+
     pima_network = NeuralNet()
     pima_network.create_layer(4)
     pima_network.train_network(p_train, p_train_t)
@@ -86,6 +99,21 @@ def main():
     print("Pima with 6 nodes in hidden layer")
     print("Pima prediction correct = ", correct, "out of", len(p_test),
           "\nAccuracy = ", (correct / len(p_test_t) * 100))
+
+    mlp_pima_class = MLPClassifier(solver='lbfgs', alpha=1e-5,
+                              hidden_layer_sizes=(6))
+    mlp_pima_class.fit(p_train, p_train_t.ravel())
+    mlp_pima_predict = mlp_pima_class.predict(p_test)
+
+    correct = 0
+    for i in range(len(p_test_t)):
+        if mlp_pima_predict[i] == p_test_t[i]:
+            correct += 1
+
+    print("Pima with 6 nodes in hidden layer SKLEARN MODEL")
+    print("Pima prediction correct = ", correct, "out of", len(p_test),
+          "\nAccuracy = ", (correct / len(p_test_t) * 100))
+
 
 
 

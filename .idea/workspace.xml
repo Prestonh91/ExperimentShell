@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="934bb99e-09e6-4604-9f9d-109928a3ca03" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/NeuralNets/netmain.py" afterPath="$PROJECT_DIR$/NeuralNets/netmain.py" />
-      <change beforePath="$PROJECT_DIR$/NeuralNets/neuralnode.py" afterPath="$PROJECT_DIR$/NeuralNets/neuralnode.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,14 +15,14 @@
     <favorites_list name="ExperimentShell" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.3998764">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
           <file leaf-file-name="neuralnode.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/NeuralNets/neuralnode.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2478">
-                  <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+                <state relative-caret-position="294">
+                  <caret line="14" column="29" lean-forward="true" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
                   </folding>
@@ -39,21 +37,12 @@
           <file leaf-file-name="netmain.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/NeuralNets/netmain.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-207">
-                  <caret line="34" column="31" lean-forward="false" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+                <state relative-caret-position="168">
+                  <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="58" selection-end-column="57" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
+                    <marker date="1520115861965" expanded="true" signature="1013:1929" ph="..." />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="tar_array.txt" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/NeuralNets/tar_array.txt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-693">
-                  <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -92,8 +81,8 @@
         <option value="$PROJECT_DIR$/KNN/file_reader.py" />
         <option value="$PROJECT_DIR$/KNN/data_processor.py" />
         <option value="$PROJECT_DIR$/NeuralNets/tar_array.txt" />
-        <option value="$PROJECT_DIR$/NeuralNets/netmain.py" />
         <option value="$PROJECT_DIR$/NeuralNets/neuralnode.py" />
+        <option value="$PROJECT_DIR$/NeuralNets/netmain.py" />
       </list>
     </option>
   </component>
@@ -263,7 +252,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14436805" sideWeight="0.49393415" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.49814913" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3114383" sideWeight="0.72554207" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.41676104" sideWeight="0.75409836" order="6" side_tool="true" content_ui="tabs" x="59" y="159" width="1682" height="766" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295583" sideWeight="0.75409836" order="6" side_tool="true" content_ui="tabs" x="59" y="159" width="1682" height="766" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.49391857" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2729332" sideWeight="0.37387624" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -623,22 +612,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NeuralNets/netmain.py">
+    <entry file="file://$PROJECT_DIR$/NeuralNets/neuralnode.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-207">
-          <caret line="34" column="31" lean-forward="false" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+        <state relative-caret-position="294">
+          <caret line="14" column="29" lean-forward="true" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NeuralNets/neuralnode.py">
+    <entry file="file://$PROJECT_DIR$/NeuralNets/netmain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2478">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="168">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="58" selection-end-column="57" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1520115861965" expanded="true" signature="1013:1929" ph="..." />
           </folding>
         </state>
       </provider>
