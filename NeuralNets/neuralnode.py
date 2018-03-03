@@ -1,14 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-file = open("output.txt", 'w')
-
 class NeuralNet:
     def __init__(self):
         self.num_of_layers = 0
         self.layers = []
-        self.training_rate = 0.20
-        self.epochs = 500
+        self.training_rate = 0.1
+        self.epochs = 400
         self.accuracy_array = []
         pass
 
@@ -21,14 +19,11 @@ class NeuralNet:
         predictions = []
 
         for row in test:
-            self.calculate_layer_outputs(row)
+            self.predict_layer_outputs(row, predictions)
 
-            print(self.layers[-1].outputs)
-
-        pass
+        return predictions
 
     def train_network(self, inputs, targets):
-        global file
         total = (len(inputs))
         print("Total inputs = ", total)
         # This is used to determine where number of weights come from when
@@ -40,9 +35,6 @@ class NeuralNet:
         # Once the user decides its time to run add the output layer
         self.create_layer(class_num, True)
 
-        file.write("The number of layers in the net is " +
-                   str(self.num_of_layers) + '\n')
-        file.write("\nThe weights at the beginning\n")
         # Lets initialize the weights before running through
         for i in range(len(self.layers)):
             if not first_run:
@@ -54,14 +46,12 @@ class NeuralNet:
                 self.layers[i].init_node_weights(len(inputs[0]))
                 first_run = False
 
-            self.layers[i].display_weights()
-
         for epoch in range(self.epochs):
             correct = 0
             # Loop through each input row to being training
             for i, row in list(enumerate(inputs)):
 
-                file.write("\nOutput layer at epoch " + str(epoch))
+                # file.write("\nOutput layer at epoch " + str(epoch))
                 self.calculate_layer_outputs(row)
 
                 # Loop through the layers backwards to calculate error at each
@@ -83,27 +73,20 @@ class NeuralNet:
                 for f, layer in list(enumerate(self.layers)):
                     self.layers[f].update_weights(self.training_rate)
 
-                    if layer.output_layer:
-                        file.write("\nNodes before clear\n" +
-                                   self.layers[f].return_node())
+                    # if layer.output_layer:
+                    #     file.write("\nNodes after weight update\n" +
+                    #                self.layers[f].return_node())
 
-                    if epoch < self.epochs - 1:
-                        self.layers[f].clear_nodes()
-
-                    if layer.output_layer:
-                        file.write("\nNodes after clear")
-                        file.write("\n" + self.layers[f].return_node())
+                    self.layers[f].clear_nodes()
 
             self.accuracy_array.append(correct)
 
-            if epoch % 100 == 0:
-                print("At epoch ", epoch)
-                print("Correct = ", correct, "Total = ", total)
+            if epoch % 50 == 0:
+                print("At epoch ", epoch, "keep waiting")
 
-        # x = np.linspace(0, self.epochs, num=self.epochs, endpoint=True)
-        # plt.plot(x, self.accuracy_array, linewidth=1)
-        # plt.show()
-        file.close()
+        x = np.linspace(0, self.epochs, num=self.epochs, endpoint=True)
+        plt.plot(x, self.accuracy_array, linewidth=1)
+        plt.show()
 
     def get_target_array(self, num_of_classes, target):
         new_target = np.zeros(num_of_classes, dtype=int)
@@ -116,8 +99,44 @@ class NeuralNet:
             new_target[target] = 1
         return new_target
 
+    def conv_array_to_target(self, tar_array):
+        if len(tar_array) == 1:
+            return tar_array[0]
+        else:
+            for i in range(len(tar_array)):
+                if tar_array[i] == 1:
+                    return i
+
+    def predict_layer_outputs(self, row, guesses):
+        file = open("tar_array.txt", "a")
+        tar_array = []
+
+        # Set to true so the layer can pull the inputs from the
+        # correct place (e.i. The input row or the layer previous
+        first_run = True
+        # Calculate the output at each layer
+        for j, layer in list(enumerate(self.layers)):
+            if not first_run:
+                self.layers[j].calc_layer_output(self.layers[j - 1].outputs)
+            else:
+                self.layers[j].calc_layer_output(row)
+                first_run = False
+
+            if layer.output_layer:
+                for node in layer.nodes:
+                    if node.a >= 0.5:
+                        tar_array.append(1)
+                    else:
+                        tar_array.append(0)
+
+                file.write(str(tar_array) + '\n')
+                guesses.append(self.conv_array_to_target(tar_array))
+                layer.clear_nodes()
+
+        file.close()
+
     def calculate_layer_outputs(self, row):
-        # Reset to true so the layer can pull the inputs from the
+        # Set to true so the layer can pull the inputs from the
         # correct place (e.i. The input row or the layer previous
         first_run = True
         # Calculate the output at each layer
@@ -170,7 +189,7 @@ class Layer:
 
     def display_weights(self):
         for node in self.nodes:
-            file.write(str(node.weights) + '\n')
+            print(node.weights,'\n')
 
     def display_activations(self):
         for node in self.nodes:
@@ -183,7 +202,7 @@ class Layer:
         for node in self.nodes:
             str_node += str(node.a) + " "
             str_node += str(node.h) + " "
-            str_node += str(node.error) + " "
+            str_node += str(node.error) + "\n"
             str_node += str(node.weights)
             str_node += '\n'
         return str_node
@@ -207,9 +226,6 @@ class Layer:
         # aj(1 - aj)(aj -tj)
         for i, node in list(enumerate(self.nodes)):
             node.error = node.a * (1 - node.a) * (node.a - target[i])
-
-            # print("Output error = ", node.a, "* (1 -", node.a, ") * (",
-            #        node.a, "-", target[i], ") =", node.error)
 
             if node.a > 0.5:
                 prediction.append(1)
